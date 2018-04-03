@@ -1,3 +1,4 @@
+#aaa
 package main
 
 import (
