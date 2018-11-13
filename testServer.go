@@ -1,4 +1,3 @@
-#aaa
 package main
 
 import (
@@ -10,7 +9,7 @@ import (
 )
 
 const (
-	upload_path string = "./"
+	upload_path string = "/mnt/dShare/shareDir9091/"
 )
 
 func helloHandle(w http.ResponseWriter, r *http.Request) {
@@ -45,7 +44,7 @@ func uploadHandle(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		fmt.Println("post file ok")
-		//io.WriteString(w, head.Filename+" 保存成功")
+		io.WriteString(w, head.Filename+" 保存成功")
 		http.Redirect(w, r, "/hello", http.StatusFound)
 		//io.WriteString(w, head.Filename)
 	}
@@ -63,7 +62,7 @@ var staticHandler http.Handler
 
 func main() {
 	//启动一个http 服务器
-	staticHandler = http.FileServer(http.Dir("./"))
+	staticHandler = http.FileServer(http.Dir("/mnt/dShare/shareDir9091/"))
 
 	http.HandleFunc("/cgi-bin/luci/admin/wan_ip_get", helloHandle)
 	//http.HandleFunc("/hello", helloHandle)
@@ -73,7 +72,7 @@ func main() {
 
 	http.HandleFunc("/", StaticServer)
 
-	err := http.ListenAndServe(":9090", nil)
+	err := http.ListenAndServe(":9091", nil)
 	if err != nil {
 		fmt.Println("服务器启动失败")
 		return
